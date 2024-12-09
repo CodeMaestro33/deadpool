@@ -1,4 +1,4 @@
-name: Run 96 times a day
+name: Run 96 times a day #cliff
 
 on:
   schedule:
