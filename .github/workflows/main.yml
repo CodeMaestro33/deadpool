@@ -1,8 +1,9 @@
+name: Run 70 Times a Day
+
 on:
   schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
-
+    - cron: "*/20 * * * *"  # Runs every 20 minutes
+  workflow_dispatch:  # Allows manual trigger of the workflow
 
 jobs:
   frequent-task:
@@ -10,6 +11,5 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
       - name: Run the Task
-        run: echo "This action runs every 15 minutes!"
+        run: echo "This action runs every ~20 minutes!"
