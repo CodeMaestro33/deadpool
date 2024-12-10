@@ -1,15 +1,16 @@
-name: Run 70 Times a Day
+name: wild
 
 on:
   schedule:
-    - cron: "*/20 * * * *"  # Runs every 20 minutes
-  workflow_dispatch:  # Allows manual trigger of the workflow
+    # Cron schedule for every 20 minutes
+    - cron: "*/20 * * * *" # Runs at 0, 20, and 40 minutes past each hour
+  workflow_dispatch: # Allows manual triggering if needed
 
 jobs:
   frequent-task:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Run the Task
-        run: echo "This action runs every ~20 minutes!"
+      - name: Display Current Time
+        run: |
+          echo "This workflow runs every 20 minutes"
+          date
