@@ -1,0 +1,35 @@
+name: Weather Data Updater
+
+on:
+  schedule:
+    - cron: "0 5,17 * * *"  # Runs at 5:00 AM and 5:00 PM UTC
+
+jobs:
+  update-weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run Weather Script
+        run: python weather_script.py
+        env:
+          API_KEY: ${{ secrets.API_KEY }}  # Fetch the API key from GitHub Secrets
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add weather_data.json
+          git commit -m "Updated weather data"
+          git push
